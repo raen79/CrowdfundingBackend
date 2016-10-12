@@ -3,6 +3,7 @@
 * PostgreSQL (our DBMS of choice)
 * Insomnia (to test the api)
 * PG Admin (to create databases and view their content)
+
 ### Post clone instructions:
 1. Edit development settings in config/database.yml to suit your installation and existing db in postgresql (make sure adapter: postgresql)
 2. Install all the gems from the gemfiles by typing this in terminal:
@@ -17,6 +18,7 @@ rake db:migrate
 ```terminal
 rake db:seed
 ```
+
 ### Maintenance instructions:
 * Make sure that all changes you make in the database are in the form of migrations so that all other users can emulate your database when they pull from github
 * Push your project once a day if it is functional (do not if it is not)
