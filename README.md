@@ -7,17 +7,17 @@
 ### Post clone instructions:
 1. Edit development settings in config/database.yml to suit your installation and existing db in postgresql (make sure adapter: postgresql)
 2. Install all the gems from the gemfiles by typing this in terminal:
-```terminal
-bundle install
-```
+    ```
+    bundle install
+    ```
 3. Run all migrations to the database (changes to the database made by other users) by running this command in terminal:
-```terminal
-rake db:migrate
-```
+    ```
+    rake db:migrate
+    ```
 4. Populate the database according to the seed file (located in db/seeds.rb) by running the following command in terminal:
-```terminal
-rake db:seed
-```
+    ```
+    rake db:seed
+    ```
 
 ### Maintenance instructions:
 * Make sure that all changes you make in the database are in the form of migrations so that all other users can emulate your database when they pull from github
