@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  funding_goal: 1
+  video: MyString
+  image: MyString
+  approved: false
+  deleted: false
+  user: one
+
+two:
+  name: MyString
+  description: MyString
+  funding_goal: 1
+  video: MyString
+  image: MyString
+  approved: false
+  deleted: false
+  user: two

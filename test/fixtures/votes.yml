@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 
+  user: one
+  VoteType: one
+  comment: one
+  project: one
+  update: one
+
+two:
+  value: 
+  user: two
+  VoteType: two
+  comment: two
+  project: two
+  update: two

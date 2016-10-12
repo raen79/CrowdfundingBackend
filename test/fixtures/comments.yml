@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  deleted: false
+  user: one
+  CommentType: one
+  update: one
+  project: one
+
+two:
+  content: MyString
+  deleted: false
+  user: two
+  CommentType: two
+  update: two
+  project: two

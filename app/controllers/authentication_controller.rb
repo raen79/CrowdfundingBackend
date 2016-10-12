@@ -15,12 +15,11 @@ class AuthenticationController < ApplicationController
         render :json => {:error => "Password does not match email address!", :cause => "pwd"}, :status => :bad_request
       # If email exists, and password input matches database, return token.
       else
-        # Set the subject of the token to user"s email and its expiration date to 4 hours from now
+        # Set the subject of the token to user's email and its expiration date to 4 hours from now
         payload = {:sub => params[:email], :exp => Time.now.to_i + 14400}
         # Set HMAC secret for token authentication. 128 bit secret as per recommendation of => http://security.stackexchange.com/questions/95972/what-are-requirements-for-hmac-secret-key
         hmac_secret = "4@X18qo&&K#kYgfxkXlvr3K!DJThU^5L"
         token = JWT.encode payload, hmac_secret, "HS512"
-
         render :json => {:token => token}
       end
     end
@@ -41,6 +40,8 @@ class AuthenticationController < ApplicationController
       # Save information in database if all information is correct
       else
         @user = User.new
+        # Random string solution from stackoverflow => http://stackoverflow.com/questions/88311/how-best-to-generate-a-random-string-in-ruby
+        # Salt is 256 bits long as per recommendation of => Practical Cryptography (Ferguson, Schneier)
         @user.salt = rand(36**64).to_s(36)
         @user.password = BCrypt::Password.create(params[:password] + @user.salt)
         @user.email = params[:email]
@@ -52,5 +53,4 @@ class AuthenticationController < ApplicationController
       end
     end
   end
-
 end
