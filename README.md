@@ -5,7 +5,18 @@
 * PG Admin (to create databases and view their content)
 
 ### Post clone instructions:
-1. Edit development settings in config/database.yml to suit your installation and existing db in postgresql (make sure adapter: postgresql)
+1. Edit development settings in config/database.yml to suit your installation and existing db in postgresql (make sure adapter: postgresql). E.g:
+
+   ```
+   development:
+      adapter: postgresql
+      encoding: unicode
+      database: Crowdfunding
+      pool: 5
+      host: localhost
+      username: myusername
+      password: mypassword
+   ```
 2. Install all the gems from the gemfiles by typing this in terminal:
    
     ```
