@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post '/', :to => 'authentication#login'
       put '/', :to => 'authentication#register'
       patch '/', :to => 'authentication#modify_user'
+      delete '/', :to => 'authentication#delete_user'
     end
   end
 end

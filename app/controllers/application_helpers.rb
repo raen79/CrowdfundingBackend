@@ -29,16 +29,7 @@ module ApplicationHelpers
     return decoded_token
   end
 
-  def verify_access_rights(current_user, id)
-    unless @current_user.id == id || @current_user.admin == true
-      render :json => {:error => 'noaccess', :cause => 'user'}, :status => :bad_request
-      return false
-    end
-
-    return true
-  end
-
-  def attr_to_update(params, attributes)
+  def attr_to_update(attributes)
     @attr_to_update = Hash.new
     # Iterate through attributes
     attributes.each do |attribute|
