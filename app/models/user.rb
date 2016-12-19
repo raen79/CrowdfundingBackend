@@ -9,7 +9,7 @@ class User < ApplicationRecord
   ## Encrypt password before saving them
   # Random string solution from stackoverflow => http://stackoverflow.com/questions/88311/how-best-to-generate-a-random-string-in-ruby
   # Salt is 256 bits long as per recommendation of => Practical Cryptography (Ferguson, Schneier)
-  before_save(self) do
+  after_validation do
     self.salt = rand(36**64).to_s(36)
     self.password = BCrypt::Password.create(self.password + salt)
     self.f_name = self.f_name.titleize
