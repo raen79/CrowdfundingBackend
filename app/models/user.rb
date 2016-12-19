@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :votes
   has_many :projects
-  has_many :updates
+  has_many :project_updates, class_name: "Update"
   has_many :transactions
   has_many :comments
 
