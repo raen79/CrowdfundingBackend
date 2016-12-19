@@ -17,11 +17,8 @@ class ApplicationController < ActionController::API
         # If user does not exist, return error
         render :json => {:error => "user_not_exist", :cause => "token"}, :status => :bad_request if @current_user.blank?
 
-        # Refresh token expiration to four hours from now (user token will only be expired if he has not logged in in 4 hours)
-        payload = decoded_token.first
-        payload["exp"] = Time.now.to_i + 14400
         # Store new refreshed token in instance variable @token (will be available from other controllers). The @token must be returned in every successful api call.
-        @token = JWT.encode payload, hmac_secret, "HS512"
+        @token = generate_token(decoded_token.first["sub"])
       # If Token Expired, return error
       rescue JWT::ExpiredSignature
         render :json => {:error => "expired", :cause => "token"}, :status => :bad_request

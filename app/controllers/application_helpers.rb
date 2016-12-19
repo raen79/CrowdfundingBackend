@@ -28,4 +28,26 @@ module ApplicationHelpers
     decoded_token = JWT.decode token, hmac_secret, true, { :algorithm => "HS512" }
     return decoded_token
   end
+
+  def verify_access_rights(current_user, id)
+    unless @current_user.id == id || @current_user.admin == true
+      render :json => {:error => 'noaccess', :cause => 'user'}, :status => :bad_request
+      return false
+    end
+
+    return true
+  end
+
+  def attr_to_update(params, attributes)
+    @attr_to_update = Hash.new
+    # Iterate through attributes
+    attributes.each do |attribute|
+      # If the attribute exists in params sent by front end, add it to hash of attributes to update
+      if !params[attribute].blank?
+        @attr_to_update[attribute] = params[attribute]
+      end
+    end
+
+    return @attr_to_update
+  end
 end

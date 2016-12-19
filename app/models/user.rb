@@ -12,6 +12,8 @@ class User < ApplicationRecord
   before_save(self) do
     self.salt = rand(36**64).to_s(36)
     self.password = BCrypt::Password.create(self.password + salt)
+    self.f_name = self.f_name.titleize
+    self.l_name = self.l_name.titleize
   end
 
   ### Validations
@@ -21,6 +23,9 @@ class User < ApplicationRecord
   validates :email, :presence => {:message => "notpresent"}, :uniqueness => {:message => "exists"}
   # Verfiy that email is in the format of an email
   validates_format_of :email, :with => /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i, :message => "format"
+  # Verify that first and last name have only chars
+  validates_format_of :l_name, :with => /\A[a-zA-z]+([ '-][a-zA-Z]+)*\z/i, :message => "format", :allow_nil => true
+  validates_format_of :f_name, :with => /\A[a-zA-z]+([ '-][a-zA-Z]+)*\z/i, :message => "format", :allow_nil => true
 
   # Handle deleted users when deleted field is true
   acts_as_paranoid :column => 'deleted', :column_type => 'boolean'
