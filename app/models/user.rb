@@ -27,7 +27,47 @@ class User < ApplicationRecord
   validates_format_of :l_name, :with => /\A[a-zA-z]+([ '-][a-zA-Z]+)*\z/i, :message => "format", :allow_nil => true
   validates_format_of :f_name, :with => /\A[a-zA-z]+([ '-][a-zA-Z]+)*\z/i, :message => "format", :allow_nil => true
 
+
   # Handle deleted users when deleted field is true
   acts_as_paranoid :column => 'deleted', :column_type => 'boolean'
 
+
+  ### Class Methods
+  # Return user's total number of transactions
+  def transactions_amount
+    self.transactions.size
+  end
+
+  # Return user's total monetary donations on the website (in currency)
+  def transactions_cost
+    self.transactions.sum(:amount)
+  end
+
+  # Return total amount of projects the user created
+  def projects_amount
+    self.projects.size
+  end
+
+  # Return user's total amount of successful projects
+  def success_projects_amount
+    @success_projects_count = 0
+
+    self.projects.joins(:transactions).group("projects.id").having("projects.funding_goal <= sum(transactions.amount)").each {|p| @success_projects_count += 1}
+
+    @success_projects_count
+  end
+
+  # Return user object for response
+  def info
+    { :id => self.id,
+      :email => self.email,
+      :f_name => self.f_name,
+      :l_name => self.l_name,
+      :birth_date => self.birth_date,
+      :transactions_amount => self.transactions_amount,
+      :transactions_cost => self.transactions_cost,
+      :projects_amount => self.projects_amount,
+      :success_projects_amount => self.success_projects_amount
+    }
+  end
 end

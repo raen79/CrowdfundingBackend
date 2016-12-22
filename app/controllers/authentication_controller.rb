@@ -98,4 +98,19 @@ class AuthenticationController < ApplicationController
 
     end
   end
+
+  def view_user
+    # Verify that the user's ID was sent
+    if verify_parameters([:id])
+      # Store the user with the ID sent in a variable
+      @user_to_view = User.find(params[:id])
+
+      # If user exists, return user back to frontend
+      unless @user_to_view.blank?
+        render :json => @user_to_view.info
+      else
+        render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request
+      end
+    end
+  end
 end
