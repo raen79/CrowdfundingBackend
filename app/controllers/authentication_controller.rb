@@ -107,7 +107,7 @@ class AuthenticationController < ApplicationController
 
       # If user exists, return user back to frontend
       unless @user_to_view.blank?
-        render :json => @user_to_view.info
+        render :json => @user_to_view.info(@token)
       else
         render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request
       end
