@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     #Project controller routes
     scope 'project' do
       put '/', :to => 'project#add_project'
+      patch '/', :to => 'project#modify_project'
     end
   end
 end

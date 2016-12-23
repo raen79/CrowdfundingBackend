@@ -64,7 +64,7 @@ class AuthenticationController < ApplicationController
       @user = User.find(params[:id])
 
       # Get attributes to update
-      @attr_to_update = attr_to_update([:id, :email, :f_name, :l_name, :password, :birth_date])
+      @attr_to_update = attr_to_update([:email, :f_name, :l_name, :password, :birth_date])
 
       # If user exists update_attributes
       if !@user.blank?

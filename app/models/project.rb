@@ -25,4 +25,12 @@ class Project < ApplicationRecord
     end
   end
 
+  ### Scopes
+  # Project.approved will return all approved projects
+  scope :approved, -> { where(:approved => true) }
+  # Project.pending will return all projects that have not been approved or rejected yet
+  scope :pending, -> { where(:approved => nil) }
+  # Project.rejected will return all projects that have been rejected
+  scope :rejected, -> { where(:approved => false) }
+
 end
