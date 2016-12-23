@@ -93,7 +93,6 @@ class AuthenticationController < ApplicationController
           end
         end
       end
-      puts @deleted_users
       render :json => {:values => @deleted_users, :type => "deleted_users", :token => @token}
 
     end
