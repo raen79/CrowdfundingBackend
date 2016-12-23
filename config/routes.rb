@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope 'api' do
+    # Authentication controller routes
     scope 'authentication' do
       post '/', :to => 'authentication#login'
       put '/', :to => 'authentication#register'
@@ -8,6 +9,11 @@ Rails.application.routes.draw do
       delete '/', :to => 'authentication#delete_user'
       get '/:id', :to => 'authentication#view_user'
       get '/', :to => 'authentication#view_users'
+    end
+
+    #Project controller routes
+    scope 'project' do
+      put '/', :to => 'project#add_project'
     end
   end
 end
