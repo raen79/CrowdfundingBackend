@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       patch '/', :to => 'authentication#modify_user'
       delete '/', :to => 'authentication#delete_user'
       get '/:id', :to => 'authentication#view_user'
+      get '/', :to => 'authentication#view_users'
     end
   end
 end

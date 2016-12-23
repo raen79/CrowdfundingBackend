@@ -58,7 +58,7 @@ class User < ApplicationRecord
   end
 
   # Return user object for response
-  def info(token)
+  def info
     { :id => self.id,
       :email => self.email,
       :f_name => self.f_name,
@@ -68,7 +68,6 @@ class User < ApplicationRecord
       :transactions_cost => self.transactions_cost,
       :projects_amount => self.projects_amount,
       :success_projects_amount => self.success_projects_amount,
-      :token => token
     }
   end
 end

@@ -107,10 +107,33 @@ class AuthenticationController < ApplicationController
 
       # If user exists, return user back to frontend
       unless @user_to_view.blank?
-        render :json => @user_to_view.info(@token)
+        @response = @user_to_view.info
+        @response[:token] = @token
+        render :json => @response
       else
         render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request
       end
+    end
+  end
+
+  def view_users
+    # Verify that page data was sent
+    if verify_parameters([:page, :page_size])
+      # Start a new custom search (class created in app/classes)
+      @custom_search = CustomSearch.new(User, params[:page], params[:page_size], JSON.parse(params[:sort]), JSON.parse(params[:filter]))
+      # Get result of search
+      @results = @custom_search.results
+      # Total number of results (without pagination)
+      @total_items = @custom_search.total_items
+      # Array to store formatted results
+      @results_array = []
+
+      # Iterate through search results and add each user's info hash to @results_array
+      @results.each do |user|
+        @results_array.push(user.info)
+      end
+
+      render :json => {:user => @results_array,  :page => params[:page], :page_size => params[:page_size], :total_items => @total_items, :token => @token}
     end
   end
 end

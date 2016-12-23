@@ -11,6 +11,8 @@ gem 'puma', '~> 3.0'
 gem 'jwt'
 # Bcrypt
 gem 'bcrypt'
+# JSON
+gem 'json'
 # ActsAsParanoid, helps deal with "deleted" entries in database
 gem "acts_as_paranoid"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

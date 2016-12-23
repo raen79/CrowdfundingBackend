@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   # Check that the user is correctly logged in before any API call
   before_action :check_token
+
   include ApplicationHelpers
 
   def check_token
