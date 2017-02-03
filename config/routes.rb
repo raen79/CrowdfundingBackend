@@ -16,5 +16,10 @@ Rails.application.routes.draw do
       put '/', :to => 'project#add_project'
       patch '/', :to => 'project#modify_project'
     end
+
+    #Update controller routes
+    scope 'update' do
+      put '/', :to => 'update#add_update'
+    end
   end
 end
