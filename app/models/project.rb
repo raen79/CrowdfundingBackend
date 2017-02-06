@@ -31,7 +31,8 @@ class Project < ApplicationRecord
   ### Class methods
   ## Transactions
   def relevant_transactions
-    self.transactions.where(:transaction => {:id => nil})
+    self.transactions
+    #.where(:transaction => {:id => nil})
   end
 
   def relevant_backers
@@ -39,11 +40,25 @@ class Project < ApplicationRecord
   end
 
   def sum_donations
-    self.relevant_transactions.sum(:amount)
+    relevant_transactions = self.relevant_transactions
+    if relevant_transactions.size > 0
+      self.relevant_transactions.sum(:amount)
+    else
+      0
+    end
   end
 
   def backers_amount
     self.relevant_backers.size
+  end
+
+  def sum_votes
+    relevant_votes = self.votes
+    if relevant_votes.size > 0
+      relevant_votes.sum(:value)
+    else
+      0
+    end
   end
 
   ## Project approval
@@ -83,16 +98,8 @@ class Project < ApplicationRecord
   end
 
   ## Objects for response
-  # Creator object
-  def creator
-    {
-      :id => self.user.id,
-      :f_name => self.user.f_name,
-      :l_name => self.user.l_name
-    }
-  end
   # Updates object
-  def updates
+  def updates_info
     updates = []
 
     self.project_updates.each do |update|
@@ -105,12 +112,13 @@ class Project < ApplicationRecord
 
     return updates
   end
+
   # Comments object
-  def comments
-    comments = []
+  def comments_info
+    project_comments = []
 
     self.comments.each do |comment|
-      comments.push({
+      project_comments.push({
           :id => comment.id,
           :content => comment.content,
           :votes => comment.votes.sum(:value),
@@ -119,8 +127,9 @@ class Project < ApplicationRecord
         })
     end
     
-    return comments
+    return project_comments
   end
+
   # Detailed project object
   def detailed_info
     {
@@ -132,11 +141,26 @@ class Project < ApplicationRecord
       :image => self.image,
       :current_funding => self.sum_donations,
       :backers => self.backers_amount,
-      :user => self.creator,
-      :updates => self.updates,
-      :comments => self.comments,
-      :votes => self.votes.sum(:value),
+      :user => self.user.summary,
+      :updates => self.updates_info,
+      :comments => self.comments_info,
+      :votes => self.sum_votes,
       :created_at => self.created_at,
+      :updated_at => self.updated_at
+    }
+  end
+
+  # Summary project object
+  def summary
+    {
+      :id => self.id,
+      :name => self.name,
+      :description => self.description,
+      :image => self.image,
+      :funding_goal => self.funding_goal,
+      :user => self.user.summary,
+      :votes => self.sum_votes,
+      :current_funding => self.sum_donations,
       :updated_at => self.updated_at
     }
   end

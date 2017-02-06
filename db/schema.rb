@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219161400) do
+ActiveRecord::Schema.define(version: 20170206221720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,13 +51,14 @@ ActiveRecord::Schema.define(version: 20161219161400) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.boolean  "refunded"
     t.integer  "user_id"
     t.integer  "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "amount"
+    t.integer  "transaction_id"
     t.index ["project_id"], name: "index_transactions_on_project_id", using: :btree
+    t.index ["transaction_id"], name: "index_transactions_on_transaction_id", using: :btree
     t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
   end
 
