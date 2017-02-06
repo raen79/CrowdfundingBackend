@@ -1,5 +1,5 @@
 class ProjectController < ApplicationController
-  
+
   include ProjectHelpers
 
   def add_project
@@ -44,4 +44,32 @@ class ProjectController < ApplicationController
     end
   end
 
+  def delete_project
+    # Variable to store all projects that were successfully deleted
+    @deleted_projects = []
+
+    # Verify that array of ID's was sent
+    if verify_parameters([:id])
+      # Iterate through ID's
+      params[:id].each do |id|
+        # If this user is allowed to delete the project with the ID provided
+        if verify_access_rights(@current_user, id, false)
+          project_to_delete = Project.find(id)
+          if !project_to_delete.blank?
+            @deleted_projects.push(project_to_delete.name)
+            project_to_delete.destroy
+          end
+        end
+      end
+      render :json => {:values => @deleted_projects, :type => "deleted_projects", :token => @token}
+
+    end
+  end
+
+  def approve_project
+    # Verify that minimum required parameters for project approval were sent by front end
+    if verify_parameters([:id, :boolean])
+      
+    end
+  end
 end

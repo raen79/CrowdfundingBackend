@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     scope 'project' do
       put '/', :to => 'project#add_project'
       patch '/', :to => 'project#modify_project'
+      delete '/', :to => 'project#delete_project'
     end
   end
 end
