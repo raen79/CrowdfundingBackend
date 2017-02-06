@@ -19,7 +19,7 @@ class ApplicationController < ActionController::API
         render :json => {:error => "user_not_exist", :cause => "token"}, :status => :bad_request if @current_user.blank?
 
         # Store new refreshed token in instance variable @token (will be available from other controllers). The @token must be returned in every successful api call.
-        @token = generate_token(decoded_token.first["sub"])
+        @token = generate_token(user_email)
       # If Token Expired, return error
       rescue JWT::ExpiredSignature
         render :json => {:error => "expired", :cause => "token"}, :status => :bad_request

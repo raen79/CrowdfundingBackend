@@ -1,5 +1,5 @@
 class ProjectController < ApplicationController
-
+  
   include ProjectHelpers
 
   def add_project
@@ -56,20 +56,42 @@ class ProjectController < ApplicationController
         if verify_access_rights(@current_user, id, false)
           project_to_delete = Project.find(id)
           if !project_to_delete.blank?
-            @deleted_projects.push(project_to_delete.name)
+            @deleted_projects.push(user_to_delete.email)
             project_to_delete.destroy
           end
         end
       end
       render :json => {:values => @deleted_projects, :type => "deleted_projects", :token => @token}
-
-    end
   end
 
   def approve_project
-    # Verify that minimum required parameters for project approval were sent by front end
-    if verify_parameters([:id, :boolean])
-      
+    if verify_parameters([:id, :approved]) && verify_admin(true)
+      @project = Project.find(params[:id])
+
+      if !@project.blank?
+        if params[:approved] == false
+          @project.reject
+        elsif params[:approved] == true
+          @project.approve
+        end
+      else
+        render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request
+      end
     end
   end
+
+  def view_project
+    if verify_parameters([:id])
+      @project = Project.find(params[:id])
+
+      if !@project.approved? && !verify_access_rights(@current_user, params[:id], true)
+        pass
+      end
+
+      @response = @user_to_view.info
+      @response[:token] = @token
+      render :json => @response
+    end
+  end
+
 end

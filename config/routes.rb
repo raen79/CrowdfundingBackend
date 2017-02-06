@@ -15,8 +15,10 @@ Rails.application.routes.draw do
     scope 'project' do
       put '/', :to => 'project#add_project'
       patch '/', :to => 'project#modify_project'
-      delete '/', :to => 'project#delete_project'
+      delete '', :to => 'project#delete_project'
+      get '/:id', :to => 'project#view_project'
     end
+    patch '/approve_project', :to => 'project#approve_project'
 
     #Update controller routes
     scope 'update' do
