@@ -54,7 +54,7 @@ class AuthenticationController < ApplicationController
 
   def modify_user
     # If not the user or not an admin return error
-    if verify_access_rights(@current_user, params[:id], true)
+    if verify_access_rights(params[:id], true)
       # If password does not match confirmation return error
       if params[:password] != params[:password_confirmation]
         render :json => {:error => 'notmatching', :cause => 'password_confirmation'}, :status => :bad_request
@@ -85,7 +85,7 @@ class AuthenticationController < ApplicationController
       # Iterate through ID's
       params[:id].each do |id|
         # If this user is allowed to delete the user with the ID provided
-        if verify_access_rights(@current_user, id, false)
+        if verify_access_rights(id, false)
           user_to_delete = User.find(id)
           if !user_to_delete.blank?
             @deleted_users.push(user_to_delete.email)
@@ -117,7 +117,7 @@ class AuthenticationController < ApplicationController
 
   def view_users
     # Verify that page data was sent
-    if verify_parameters([:page, :page_size])
+    if verify_parameters([:page, :page_size, :sort, :filter])
       # Start a new custom search (class created in app/classes)
       @custom_search = CustomSearch.new(User, params[:page], params[:page_size], JSON.parse(params[:sort]), JSON.parse(params[:filter]))
       # Get result of search

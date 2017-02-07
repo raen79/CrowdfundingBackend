@@ -48,6 +48,15 @@ class User < ApplicationRecord
     self.projects.size
   end
 
+  # Return info for "creator" in project, etc...
+  def summary
+    {
+      :id => self.id,
+      :f_name => self.f_name,
+      :l_name => self.l_name
+    }
+  end
+
   # Return user's total amount of successful projects
   def success_projects_amount
     @success_projects_count = 0
