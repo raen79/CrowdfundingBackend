@@ -45,10 +45,10 @@ class UpdateController < ApplicationController
     	  # Iterate through each ID
     	  params[:id].each do |id|
         	# Check if this user is allowed to delete the update with the ID provided
-        	if verify_access_rights(@current_user, id, false)
+        	if verify_delete_rights(@current_user, id, false)
         	  update_to_delete = Update.find(id)
           		if !update_to_delete.blank?
-            		@deleted_updates.push(user_to_delete.email)
+            		@deleted_updates.push(update_to_delete.name)
             		update_to_delete.destroy
           		end
         	end
@@ -57,7 +57,7 @@ class UpdateController < ApplicationController
       	end
   	end
 
-	def view_update	# Nowhere near finished
+	def view_update
 		# Verify that page data was sent
 		if verify_parameters([:id])
 			@update_to_view = Update.find(params[:id])
