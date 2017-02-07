@@ -54,13 +54,8 @@ GEM
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
-<<<<<<< HEAD
     ffi (1.9.14)
     ffi (1.9.14-x86-mingw32)
-=======
-    ffi (1.9.14-x86-mingw32)
-    ffi (1.9.17)
->>>>>>> 4a72b915218eac19a3a6478d2243516bf73c6033
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.8.0)
@@ -80,11 +75,8 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     nio4r (1.2.1)
-<<<<<<< HEAD
     nokogiri (1.6.8.1-x86-mingw32)
-=======
     nokogiri (1.6.8.1)
->>>>>>> 4a72b915218eac19a3a6478d2243516bf73c6033
       mini_portile2 (~> 2.1.0)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
