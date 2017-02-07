@@ -15,6 +15,8 @@ gem 'bcrypt'
 gem 'json'
 # ActsAsParanoid, helps deal with "deleted" entries in database
 gem "acts_as_paranoid"
+
+gem "wdm", '>= 0.1.0' if Gem.win_platform?
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
