@@ -46,6 +46,5 @@ Rails.application.routes.draw do
       get '/', :to => 'transaction#view_transactions'
     end
     put '/refund_transaction', :to => 'transaction#refund_transaction'
-
   end
 end

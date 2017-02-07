@@ -12,9 +12,20 @@ module ApplicationHelpers
     return true
   end
 
+  def verify_admin(with_render)
+    unless @current_user.admin == true
+      if with_render
+        render :json => {:error => 'noaccess', :cause => 'user'}, :status => :bad_request
+      end
+      return false
+    end
+
+    return true
+  end
+
   def generate_token(email)
     # Set the subject of the token to user's email and its expiration date to 4 hours from now
-    payload = {:sub => params[:email], :exp => Time.now.to_i + 14400}
+    payload = {:sub => email, :exp => Time.now.to_i + 14400}
     # Set HMAC secret for token authentication. 128 bit secret as per recommendation of => http://security.stackexchange.com/questions/95972/what-are-requirements-for-hmac-secret-key
     hmac_secret = "4@X18qo&&K#kYgfxkXlvr3K!DJThU^5L"
     token = JWT.encode payload, hmac_secret, "HS512"
