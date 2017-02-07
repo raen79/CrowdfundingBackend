@@ -36,13 +36,39 @@ class UpdateController < ApplicationController
 		end
 	end
 
-	def delete_update
-		#verify 
+	def delete_update	# I believe this works, needs to be double checked however
+    	# Variable to store all updates which were successfully deleted
+    	@deleted_updates = []
 
+    	# Verify that array of ID's was sent
+    	if verify_parameters([:id])
+    	  # Iterate through each ID
+    	  params[:id].each do |id|
+        	# Check if this user is allowed to delete the update with the ID provided
+        	if verify_access_rights(@current_user, id, false)
+        	  update_to_delete = Update.find(id)
+          		if !update_to_delete.blank?
+            		@deleted_updates.push(user_to_delete.email)
+            		update_to_delete.destroy
+          		end
+        	end
+      	  end
+      	  render :json => {:values => @deleted_updates, :type => "deleted_updates", :token => @token}
+      	end
+  	end
+
+	def view_update	# Nowhere near finished
+		# Verify that page data was sent
+		if verify_parameters([:id])
+			@update_to_view = Update.find(params[:id])
+			# If update exists, return update back to frontend
+			unless @update_to_view.blank?
+				@response = @update_to_view.info
+				render :json => @response
+			else
+				render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request
+			end
+		end
 	end
-
-	def view_update
-		#wut
-
-	end
+	
 end
