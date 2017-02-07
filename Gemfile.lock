@@ -43,17 +43,27 @@ GEM
       activesupport (>= 4.0, < 5.1)
     arel (7.1.4)
     bcrypt (3.1.11)
+<<<<<<< HEAD
+    bcrypt (3.1.11-x86-mingw32)
+    builder (3.2.2)
+=======
     builder (3.2.3)
+>>>>>>> b4d305613b8d1552339c451e900a691913ad81f4
     byebug (9.0.6)
     concurrent-ruby (1.0.4)
     diff-lcs (1.3)
     erubis (2.7.0)
+<<<<<<< HEAD
+    ffi (1.9.14)
+    ffi (1.9.14-x86-mingw32)
+=======
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
     ffi (1.9.17)
+>>>>>>> b4d305613b8d1552339c451e900a691913ad81f4
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.8.0)
@@ -74,6 +84,8 @@ GEM
     minitest (5.10.1)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
+      mini_portile2 (~> 2.1.0)
+    nokogiri (1.6.8.1-x86-mingw32)
       mini_portile2 (~> 2.1.0)
     pg (0.19.0)
     puma (3.7.0)
@@ -140,12 +152,20 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+<<<<<<< HEAD
+    tzinfo-data (1.2016.10)
+      tzinfo (>= 1.0.0)
+    wdm (0.1.1)
+    websocket-driver (0.6.4)
+=======
     websocket-driver (0.6.5)
+>>>>>>> b4d305613b8d1552339c451e900a691913ad81f4
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   acts_as_paranoid
@@ -162,6 +182,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  wdm (>= 0.1.0)
 
 BUNDLED WITH
    1.13.6
