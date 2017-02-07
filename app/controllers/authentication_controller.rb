@@ -117,7 +117,7 @@ class AuthenticationController < ApplicationController
 
   def view_users
     # Verify that page data was sent
-    if verify_parameters([:page, :page_size])
+    if verify_parameters([:page, :page_size, :sort, :filter])
       # Start a new custom search (class created in app/classes)
       @custom_search = CustomSearch.new(User, params[:page], params[:page_size], JSON.parse(params[:sort]), JSON.parse(params[:filter]))
       # Get result of search
