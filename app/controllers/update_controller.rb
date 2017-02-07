@@ -36,7 +36,7 @@ class UpdateController < ApplicationController
 		end
 	end
 
-	def deleted_updates	# I believe this works, needs to be double checked however
+	def delete_update	# I believe this works, needs to be double checked however
     	# Variable to store all updates which were successfully deleted
     	@deleted_updates = []
 
@@ -48,12 +48,12 @@ class UpdateController < ApplicationController
         	if verify_access_rights(@current_user, id, false)
         	  update_to_delete = Update.find(id)
           		if !update_to_delete.blank?
-            		@deleted_updates.push(update_to_delete.email)	#change email
+            		@deleted_updates.push(user_to_delete.email)
             		update_to_delete.destroy
           		end
         	end
       	  end
-      	  render :json => {:values => @deleted_updates, :type => "deleted_updates"}
+      	  render :json => {:values => @deleted_updates, :type => "deleted_updates", :token => @token}
       	end
   	end
 
