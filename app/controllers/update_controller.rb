@@ -36,7 +36,7 @@ class UpdateController < ApplicationController
 		end
 	end
 
-	def delete_update	# I believe this works, needs to be double checked however
+	def delete_update
     	# Variable to store all updates which were successfully deleted
     	@deleted_updates = []
 
