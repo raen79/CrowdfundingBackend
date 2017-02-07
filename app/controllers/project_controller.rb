@@ -93,7 +93,7 @@ class ProjectController < ApplicationController
     end
   end
 
-  def view_project
+  def view_projects
     # Verify that page data was sent
     if verify_parameters([:page, :page_size, :sort, :filter])
       # Start a new custom search (class created in app/classes)
