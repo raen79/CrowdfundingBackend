@@ -2,7 +2,7 @@ class UpdateController < ApplicationController
 	
 	include UpdateHelpers
 
-	def add_update
+	def add_update #Dom
 		#verify that front end sent required parameters
 		if verify_parameters([:project_id, :name, :description]) && verify_access_rights(@current_user, params[:project_id], true) #also verify user
 			
@@ -26,24 +26,34 @@ class UpdateController < ApplicationController
 		end
 	end
 
-	def modify_update
+	def modify_update #Dom
 		@update = Update.find(params[:id])
 		@project = @update.project
-
 		#verify user has right to modify update
 		if verify_access_rights(@current_user, @project.id, true)
 
+			#get attributes for updating
+			@attr_to_update = attr_to_update([:name, :description])
+			
+			if !@update.blank?
+				@update.update_attributes(@attr_to_update)
+				render :json => {:token => @token}
+			else
+				render :json => {:error => 'invalid', :cause => '!existent_update'}
+			end
+		else #user failed to verify
+			render :json => {:error => 'denied', :cause => 'id'}, :status => :bad_request
 		end
 	end
 
 	def delete_update	# I believe this works, needs to be double checked however
     	# Variable to store all updates which were successfully deleted
-    	@deleted_updates = []
+        @deleted_updates = []
 
     	# Verify that array of ID's was sent
     	if verify_parameters([:id])
-    	  # Iterate through each ID
-    	  params[:id].each do |id|
+    	    # Iterate through each ID
+    	    params[:id].each do |id|
         	# Check if this user is allowed to delete the update with the ID provided
         	if verify_access_rights(@current_user, id, false)
         	  update_to_delete = Update.find(id)

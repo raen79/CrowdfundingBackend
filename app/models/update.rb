@@ -1,4 +1,4 @@
-class Update < ApplicationRecord
+class Update < ApplicationRecord #Dom but mainly Eran
   belongs_to :user
   belongs_to :project
 
@@ -23,7 +23,7 @@ class Update < ApplicationRecord
     # If description is smaller than 300 chars without tags
     full_sanitizer = Rails::Html::FullSanitizer.new
     description_without_tags = full_sanitizer.sanitize(self.description)
-    if description_without_tags.length < 300
+    if description_without_tags.length < 300 # do we really want to make it this long? [[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]
       errors.add(:description, :message => "length")
     end
   end
