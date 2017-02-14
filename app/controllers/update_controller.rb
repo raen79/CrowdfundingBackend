@@ -72,13 +72,11 @@ class UpdateController < ApplicationController
 		if verify_parameters([:id])
 			@update_to_view = Update.find(params[:id])
 			# If update exists, return update back to frontend
-			unless @update_to_view.blank?
-				@response = @update_to_view.info
+			if @update_to_view.approved? || (!@update_to_view.approved? && verify_access_rights(params[:id], true))
+				@response = @update_to_view.detailed_info
+				@response[:token] = @token
 				render :json => @response
-			else
-				render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request
 			end
 		end
 	end
-	
 end
