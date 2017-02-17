@@ -28,6 +28,28 @@ class Update < ApplicationRecord #Dom but mainly Eran
     end
   end
 
+  def approved?
+    if self.approved == true
+      true
+    else
+      false
+    end
+  end
+
+  def updates_info
+    updates = []
+
+    self.project_updates.each do |update|
+      updates.push({
+          :id => update.id,
+          :name => update.name,
+          :created_at => update.created_at
+        })
+    end
+
+    return updates
+  end
+
   # Handle deleted users when deleted field is true
   acts_as_paranoid :column => 'deleted', :column_type => 'boolean'
 
