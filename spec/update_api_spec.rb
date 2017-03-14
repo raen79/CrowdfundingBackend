@@ -1,4 +1,4 @@
-require 'rails helper'
+require 'rails_helper'
 
 def generate_token
   params = {
@@ -32,7 +32,7 @@ RSpec.describe "Update", :type => :request do
 
 	end
 
-	describe "GET /api/update/:id" do	#test view_update
+	describe "GET /api/update/:id" do	#test view_update		I think this works? Could be my
 		before do
 			create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
 		end
