@@ -26,7 +26,7 @@ RSpec.describe "Update", :type => :request do
 		end
 
 		it "deletes the specified users update" do
-			delete '/api/update/:id'
+			delete '/api/update/'
 			expect(response.status).to eq 200
 		end
 
