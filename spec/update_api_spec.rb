@@ -16,7 +16,7 @@ end
 
 RSpec.describe "Update", :type => :request do
 	before do
-		create :user
+		#create :user
 		@token = generate_token
 	end
 
@@ -48,15 +48,15 @@ RSpec.describe "Update", :type => :request do
 
 	end
 
-	describe "PUT /apt/update/:id" do #test add update .dom FAIL
-		it "creates a new update" do
-			before do
-				create :project, :id => 1, :name => "Update test project", :description => "Update test project description"
-			end
+	describe "PUT /api/update/" do #test add update .dom FAIL
+	  before do
+      create :project#, :id => 1, :name => "Update test project", :description => "Update test project description"
+    end
+    it "creates a new update" do
 
 			params={:project_id => 1, :name => "Update test", :description => "Such test description, many describe, wow"}
 
-			put '/api/update/:id',
+			put '/api/update/',
 				:params => params.to_json,
 				:headers => {"Token" => @token, 'Content-Type': 'application/json'}
 
