@@ -46,18 +46,14 @@ class UpdateController < ApplicationController
 		end
 	end
 
-	def delete_update
-    	# Variable to store all updates which were successfully deleted
-        @deleted_updates = []
+	def delete_update 	#Matt
+        @deleted_updates = []	# Variable to store all updates which were successfully deleted
 
-    	# Verify that array of ID's was sent
-    	if verify_parameters([:id])
-    	    # Iterate through each ID
-    	    params[:id].each do |id|
-        	# Check if this user is allowed to delete the update with the ID provided
-        	if verify_delete_rights(@current_user, id, false)
+    	if verify_parameters([:id])		# Verify that array of ID's was sent
+    	    params[:id].each do |id| 	# Iterate through each ID
+        	if verify_delete_rights(@current_user, id, false) # Check if this user is allowed to delete the update with the ID provided
         	  update_to_delete = Update.find(id)
-          		if !update_to_delete.blank?
+          		if !update_to_delete.blank?		# When the id is found, push it to @deleted_updates variable
             		@deleted_updates.push(update_to_delete.name)
             		update_to_delete.destroy
           		end
@@ -67,15 +63,13 @@ class UpdateController < ApplicationController
       	end
   	end
 
-	def view_update
-		# Verify that page data was sent
-		if verify_parameters([:id])
+	def view_update 	#Matt
+		if verify_parameters([:id])		# Verify that page data was sent
 			@update_to_view = Update.find(params[:id])
-			# If update exists, return update back to frontend
-			if @update_to_view.approved? || (!@update_to_view.approved? && verify_access_rights(params[:id], true))
-				@response = @update_to_view.detailed_info
-				@response[:token] = @token
-				render :json => @response
+			if @update_to_view.approved? || (!@update_to_view.approved? && verify_access_rights(params[:id], true))		# If update exists and id has access rights, return update back to frontend
+				@response = @update_to_view.updates_info	# set @response so it contains all infomation which frontend wants
+				@response[:token] = @token		# Give @response a token
+				render :json => @response 		# Send @response to frontend
 			end
 		end
 	end

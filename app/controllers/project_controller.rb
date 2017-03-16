@@ -56,7 +56,7 @@ class ProjectController < ApplicationController
         if verify_access_rights(id, false)
           project_to_delete = Project.find(id)
           if !project_to_delete.blank?
-            @deleted_projects.push(user_to_delete.email)
+            @deleted_projects.push(project_to_delete.name)
             project_to_delete.destroy
           end
         end
