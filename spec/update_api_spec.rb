@@ -1,4 +1,4 @@
-require 'rails helper'
+require 'rails_helper'
 
 def generate_token
   params = {
@@ -20,7 +20,7 @@ RSpec.describe "Update", :type => :request do
 		@token = generate_token
 	end
 
-	describe "DEL /api/update/:id" do	#test delete_update
+	describe "DEL /api/update/:id" do	#test delete_update .matt
 		before do
 			create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
 		end
@@ -32,7 +32,7 @@ RSpec.describe "Update", :type => :request do
 
 	end
 
-	describe "GET /api/update/:id" do	#test view_update
+	describe "GET /api/update/:id" do	#test view_update .matt
 		before do
 			create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
 		end
@@ -47,5 +47,15 @@ RSpec.describe "Update", :type => :request do
 		end
 
 	end
+
+	#describe "ADD /apt/update/:id" do #test add update .dom
+	#	before do
+	#		create :user, id: => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
+	#	end
+
+	#	it "adds an update" do
+
+	#	end
+	#end
 	
 end

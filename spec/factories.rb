@@ -20,15 +20,15 @@ FactoryGirl.define do
       id 1
       created_at "2017-03-12 12:40:20.206749"
       amount 500
-      project_id 1
-      user_id 1
+      project
+      user
     end
-
+    
     factory :comment do
       id 1
       content "jeremy so lit"
-      user_id 2
+      user
       comment_type_id 1
-      project_id 1
+      project
     end
 end
