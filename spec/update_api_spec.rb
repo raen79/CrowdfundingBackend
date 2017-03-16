@@ -49,11 +49,11 @@ RSpec.describe "Update", :type => :request do
 	end
 
 	describe "PUT /apt/update/:id" do #test add update .dom FAIL
-		it "creates a new update" do
-			before do
+		before do
 				create :project, :id => 1, :name => "Update test project", :description => "Update test project description"
-			end
+		end
 
+		it "creates a new update" do
 			params={:project_id => 1, :name => "Update test", :description => "Such test description, many describe, wow"}
 
 			put '/api/update/:id',
@@ -64,7 +64,7 @@ RSpec.describe "Update", :type => :request do
 		end
 	end
 	
-	describe "PATCH /apt/update/:id" do #test modify update .dom INCOMPLETE
+	describe "PATCH /apt/update/" do #test modify update .dom INCOMPLETE
 		before do
 			#create :project_id =>
 		end
