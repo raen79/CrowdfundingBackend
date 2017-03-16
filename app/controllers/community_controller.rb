@@ -31,28 +31,32 @@ class CommunityController < ApplicationController
 		if verify_parameters([:id])
 				@d_id = params[:id]
 				#if verify_access_rights(@current_user, @d_id, false)
-					@comment_to_delete = Comment.where(:id => @d_id)
-					if verify_access_rights(@current_user, @comment_to_delete.user_id, false)
-						if !@comment_to_delete.blank?
-							@comment_to_delete.destroy
-							render :json => {:token => @token}
-						else
-							render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request	
-						end	
-					end
+				@comment_to_delete = Comment.find(@d_id)
+				#@temp_user = User.where(:id => @comment_to_delete.user.id)
+					#@comment_to_delete.user_id = User.where(:id => @comment_to_delete.id)
+				if verify_access_rights(@current_user, @comment_to_delete.user.id, false)
+					if !@comment_to_delete.blank?
+						@comment_to_delete.destroy
+						render :json => {:token => @token}
+					else
+						render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request	
+					end	
+				end
 			
 		end
 	end
 
 	def view_comment
 		if verify_parameters([:id])
-			@comment_to_view = Comment.where(:id => params[:id])
+			@v_id = params[:id]
+			@comment_to_view = Comment.where(:id => params[:id]).first
 
 			#if commment exists,return user to frontend
 			unless @comment_to_view.blank?
 				#where to write .info?
-				@response = @comment_to_view.info
-				@response[:token] =	@token
+				@response = @comment_to_view
+				#@response[:token] =	@token
+				#render :json => @response
 				render :json => @response
 			else
 				render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request
@@ -62,11 +66,11 @@ class CommunityController < ApplicationController
 	end
 
 	def vote
-		if verify_parameters([:project_id, :value, :v_type])
+		if verify_parameters([:subject_id, :value, :type])
 			@vote = Vote.new
-			@vote.project_id = params[:project_id]
+			@vote.project_id = params[:subject_id]
 			@vote.value = params[:value]
-			@vote.vote_type_id = params[:v_type]
+			@vote.vote_type = VoteType.where(:name => params[:type]).first
 			
 
 			if @vote.save
