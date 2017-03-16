@@ -48,11 +48,15 @@ RSpec.describe "Update", :type => :request do
 
 	end
 
-	describe "PUT /apt/update/:id" do #test add update .dom UNTESTED
+	describe "PUT /apt/update/:id" do #test add update .dom FAIL
 		it "creates a new update" do
+			before do
+				create :project, :id => 1, :name => "Update test project", :description => "Update test project description"
+			end
+
 			params={:project_id => 1, :name => "Update test", :description => "Such test description, many describe, wow"}
 
-			put '/api/update/',
+			put '/api/update/:id',
 				:params => params.to_json,
 				:headers => {"Token" => @token, 'Content-Type': 'application/json'}
 
