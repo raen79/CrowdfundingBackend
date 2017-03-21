@@ -16,20 +16,26 @@ end
 
 RSpec.describe "Update", :type => :request do
 	before do
-		create :user
+		#create :user
 		@token = generate_token
 	end
 
-	describe "DEL /api/update/:id" do	#test delete_update .matt FAIL
+	describe "DEL /api/update/ :id" do	#test delete_update .matt FAIL
 		before do
 			create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
+			create :comment, :id => 2, :created_at => "2017-03-12 12:40:20.206749", :updated_at => "2017-03-12 12:40:20.206749",   :user_id => 1, :project_id => 1
 		end
 
 		it "deletes the specified users update" do
-			delete '/api/update/:id'
+			params = {
+				:id => 2
+			}
+
+			delete '/api/update/',
+			:params => params.to_json,
+			:headers => {"Token" => @token, 'Content-Type': 'application/json'}
 			expect(response.status).to eq 200
 		end
-
 	end
 
 	describe "GET /api/update/:id" do	#test view_update .matt FAIL
@@ -48,7 +54,11 @@ RSpec.describe "Update", :type => :request do
 
 	end
 
-	describe "PUT /apt/update/:id" do #test add update .dom UNTESTED
+	describe "PUT /api/update/" do #test add update .dom FAIL
+	  	before do
+     		create :project#, :id => 1, :name => "Update test project", :description => "Update test project description"
+    	end
+
 		it "creates a new update" do
 			params={:project_id => 1, :name => "Update test", :description => "Such test description, many describe, wow"}
 
@@ -60,7 +70,7 @@ RSpec.describe "Update", :type => :request do
 		end
 	end
 	
-	describe "PATCH /apt/update/:id" do #test modify update .dom INCOMPLETE
+	describe "PATCH /apt/update/" do #test modify update .dom INCOMPLETE
 		before do
 			#create :project_id =>
 		end

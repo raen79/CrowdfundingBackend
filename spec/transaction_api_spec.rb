@@ -31,6 +31,7 @@ RSpec.describe "Transaction", :type => :request do
         :params => params.to_json,
         :headers => {"Token" => @token, 'Content-Type': 'application/json'}
 
+      expect(body['token'])
       expect(response.status).to eq 200
 
     end
@@ -38,13 +39,13 @@ RSpec.describe "Transaction", :type => :request do
 
   describe "PUT /api/refund_transaction/" do
     before do
-      create :transaction
+      create :transaction, :id => 2, :created_at => "2017-03-12 12:40:20.206749", :amount => 470, :project_id => 1, :user_id => 1
     end
 
     it "refunds an existing transaction" do
       params = {
-        :transaction_id => 1,
-        :amount => 500
+        :transaction_id => 2,
+        :amount => 470
       }
 
       put '/api/refund_transaction/',
@@ -72,6 +73,7 @@ RSpec.describe "Transaction", :type => :request do
         :headers => {"Token" => @token},
         :params => params
       body = JSON.parse(response.body)
+      expect(body['token'])
       expect(body['transactions']) == [{"id" => 2, "date" => "2017-03-12 12:40:20.206749", "amount" => 470, "project_id" => 1, "user_id" => 1}]
       expect(response.status).to eq 200
 

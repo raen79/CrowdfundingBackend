@@ -32,6 +32,13 @@ FactoryGirl.define do
       project
     end
 
+    factory :update do
+      id 1
+      created_at "2017-03-12 12:40:20.206749"
+      updated_at "2017-03-12 12:40:20.206749"
+      user_id 
+      project_id 
+    end
 
 
 end
