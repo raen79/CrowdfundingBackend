@@ -1,6 +1,7 @@
 class ProjectController < ApplicationController
   
   include ProjectHelpers
+  skip_before_action :check_token, :only => [:view_project, :view_projects]
 
   def add_project
     # Verify that minimum required parameters for project creation were sent by front end

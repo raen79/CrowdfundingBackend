@@ -1,6 +1,6 @@
 class CommunityController < ApplicationController
 	include CommunityHelpers
-	#skip_before_action :check_token, :only => [:login, :register]
+	skip_before_action :check_token, :only => [:view_comment]
 
 	def add_comment
 		if verify_parameters([:subject_id, :content, :type])
