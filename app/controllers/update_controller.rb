@@ -64,14 +64,25 @@ class UpdateController < ApplicationController
       	end
   	end
 
-	def view_update 	#Matt
-		if verify_parameters([:id])		# Verify that page data was sent
-			@update_to_view = Update.find(params[:id])
-			if @update_to_view.approved? || (!@update_to_view.approved? && verify_access_rights(params[:id], true))		# If update exists and id has access rights, return update back to frontend
-				@response = @update_to_view.updates_info	# set @response so it contains all infomation which frontend wants
-				@response[:token] = @token		# Give @response a token
-				render :json => @response 		# Send @response to frontend
-			end
-		end
-	end
+	# def view_update 	#Matt
+	# 	if verify_parameters([:id])		# Verify that page data was sent
+	# 		@update_to_view = Update.find(params[:id])
+	# 		if @update_to_view.approved? || (!@update_to_view.approved? && verify_access_rights(params[:id], true))		# If update exists and id has access rights, return update back to frontend
+	# 			@response = @update_to_view.updates_info	# set @response so it contains all infomation which frontend wants
+	# 			@response[:token] = @token		# Give @response a token
+	# 			render :json => @response 		# Send @response to frontend
+	# 		end
+	# 	end
+	# end
+  def view_update   #Matt
+    if verify_parameters([:id])   # Verify that page data was sent
+      @update_to_view = Update.find(params[:id])
+      unless @update_to_view.blank?
+        @response = @update_to_view.project.updates_info
+        @response[:token] = @token
+        print @response
+        render :json => @response    # Send @response to frontend
+      end
+    end
+  end
 end

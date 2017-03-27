@@ -28,13 +28,13 @@ class Update < ApplicationRecord #Dom but mainly Eran
     end
   end
 
-  def approved?
-    if self.approved == true
-      true
-    else
-      false
-    end
-  end
+  # def approved?
+  #   if self.approved == true
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
 
   def updates_info
     updates = []

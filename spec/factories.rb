@@ -34,10 +34,12 @@ FactoryGirl.define do
 
     factory :update do
       id 1
+      name "Test Update 1"
+      description "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec."
       created_at "2017-03-12 12:40:20.206749"
       updated_at "2017-03-12 12:40:20.206749"
-      user_id 
-      project_id 
+      user
+      project
     end
 
 

@@ -16,31 +16,31 @@ end
 
 RSpec.describe "Update", :type => :request do
 	before do
-		#create :user
+		create :project
 		@token = generate_token
 	end
 
-	describe "DEL /api/update/ :id" do	#test delete_update .matt FAIL
+	describe "DEL /api/update/" do	#test delete_update Nathan PASS
 		before do
-			create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
-			create :comment, :id => 2, :created_at => "2017-03-12 12:40:20.206749", :updated_at => "2017-03-12 12:40:20.206749",   :user_id => 1, :project_id => 1
+			create :update, :id => 1, :created_at => "2017-03-12 12:40:20.206749", :updated_at => "2017-03-12 12:40:20.206749", :user_id => 1, :project_id => 1
 		end
 
 		it "deletes the specified users update" do
 			params = {
-				:id => 2
+				:id => [1]
 			}
 
-			delete '/api/update/',
-			:params => params.to_json,
-			:headers => {"Token" => @token, 'Content-Type': 'application/json'}
+			delete '/api/update',
+				:params => params.to_json,
+				:headers => {"Token" => @token, 'Content-Type': 'application/json'}
+			#print JSON.parse(response.body)
 			expect(response.status).to eq 200
 		end
 	end
 
 	describe "GET /api/update/:id" do	#test view_update .matt FAIL
 		before do
-			create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
+			create :update, :id => 1, :created_at => "2017-03-12 12:40:20.206749", :updated_at => "2017-03-12 12:40:20.206749", :user_id => 1, :project_id => 1
 		end
 
 		it "returns the specified users update" do
@@ -49,39 +49,38 @@ RSpec.describe "Update", :type => :request do
 
 			body = JSON.parse(response.body)
 			user_email = body['email']
-			expect(user_email) == 'eran.peer79@gmail.com'
+			expect(user_email) == 'admin@admin.com'
 		end
 
 	end
 
-	describe "PUT /api/update/" do #test add update .dom FAIL responce == 400
-	  	before do
-     		create :project#, :id => 1, :name => "Update test project", :description => "Update test project description"
-    	end
-
+	describe "PUT /api/update" do #test add update Nathan PASS
 		it "creates a new update" do
-			params={:project_id => 1, :name => "Update test", :description => "Such test description, many describe, wow"}
-
-			put '/api/update/',
+			params={:project_id => 1, :name => "Update test", :description => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec."}
+			
+			put '/api/update',
 				:params => params.to_json,
 				:headers => {"Token" => @token, 'Content-Type': 'application/json'}
-
+			#print JSON.parse(response.body)
 			expect(response.status).to eq 200
 		end
 	end
 	
-	describe "PATCH /apt/update/" do #test modify update .dom INCOMPLETE
+	describe "PATCH /api/update" do #test modify update Nathan PASS
 		before do
-			create :project
+			create :update, :id => 1, :created_at => "2017-03-12 12:40:20.206749", :updated_at => "2017-03-12 12:40:20.206749", :user_id => 1, :project_id => 1
 		end
 
 		it "modifies a project" do
-			params={} #FIND OUT FROM DATABASE
-
-			patch '/api/update/',
+			params={
+				:id => 1,
+				:name => "Modify update name",
+				:description => "MODIFIED Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec."
+			}
+			patch '/api/update',
 				:params => params.to_json,
 				:headers => {"Token" => @token, 'Content-Type': 'application/json'}
-
+			#print JSON.parse(response.body)
 			expect(response.status).to eq 200
 		end
 	end
