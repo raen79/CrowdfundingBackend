@@ -48,7 +48,7 @@ RSpec.describe "Update", :type => :request do
 
 	end
 
-	describe "PUT /api/update/" do #test add update .dom FAIL
+	describe "PUT /api/update/" do #test add update .dom FAIL responce == 400
 	  	before do
      		create :project#, :id => 1, :name => "Update test project", :description => "Update test project description"
     	end
@@ -66,8 +66,17 @@ RSpec.describe "Update", :type => :request do
 	
 	describe "PATCH /apt/update/" do #test modify update .dom INCOMPLETE
 		before do
-			#create :project_id =>
+			create :project
 		end
 
+		it "modifies a project" do
+			params={} #FIND OUT FROM DATABASE
+
+			patch '/api/update/',
+				:params => params.to_json,
+				:headers => {"Token" => @token, 'Content-Type': 'application/json'}
+
+			expect(response.status).to eq 200
+		end
 	end
 end
