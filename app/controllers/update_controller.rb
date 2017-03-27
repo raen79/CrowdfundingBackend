@@ -1,6 +1,7 @@
 class UpdateController < ApplicationController
 	
 	include UpdateHelpers
+	skip_before_action :check_token, :only => [:view_update]
 
 	def add_update #Dom
 		#verify that front end sent required parameters
