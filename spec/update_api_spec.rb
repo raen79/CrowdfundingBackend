@@ -118,9 +118,9 @@ RSpec.describe "Update", :type => :request do
 			create :update, :id => 1, :created_at => "2017-03-12 12:40:20.206749", :updated_at => "2017-03-12 12:40:20.206749", :user_id => 1, :project_id => 1
 		end
 
-		it "Fails to modify project! id is missing." do
+		it "Fails to modify project! name is missing." do
 			params={
-				:name => "Modify update name",
+				:id => 1,
 				:description => "MODIFIED Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec."
 			}
 			patch '/api/update',
