@@ -112,21 +112,4 @@ RSpec.describe "Update", :type => :request do
 			expect(response.status).to eq 200
 		end
 	end
-
-	describe "PATCH /api/update" do #test modify update for failure Matthew PASS
-		before do
-			create :update, :id => 1, :created_at => "2017-03-12 12:40:20.206749", :updated_at => "2017-03-12 12:40:20.206749", :user_id => 1, :project_id => 1
-		end
-
-		it "Fails to modify project! name is missing." do
-			params={
-				:id => 1,
-				:description => "MODIFIED Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec."
-			}
-			patch '/api/update',
-				:params => params.to_json,
-				:headers => {"Token" => @token, 'Content-Type': 'application/json'}
-			expect(response.status).to eq 400
-		end
-	end
 end
