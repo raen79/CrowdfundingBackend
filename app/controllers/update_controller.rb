@@ -48,40 +48,29 @@ class UpdateController < ApplicationController
 	end
 
 	def delete_update 	#Matt
-        @deleted_updates = []	# Variable to store all updates which were successfully deleted
+		@deleted_updates = []	# Variable to store all updates which were successfully deleted
 
-    	if verify_parameters([:id])		# Verify that array of ID's was sent
-    	    params[:id].each do |id| 	# Iterate through each ID
-        	if verify_delete_rights(@current_user, id, false) # Check if this user is allowed to delete the update with the ID provided
-        	  update_to_delete = Update.find(id)
-          		if !update_to_delete.blank?		# When the id is found, push it to @deleted_updates variable
-            		@deleted_updates.push(update_to_delete.name)
-            		update_to_delete.destroy
-          		end
-        	end
-      	  end
-      	  render :json => {:values => @deleted_updates, :type => "deleted_updates", :token => @token}
-      	end
-  	end
+		if verify_parameters([:id])		# Verify that array of ID's was sent
+			params[:id].each do |id| 	# Iterate through each ID
+			if verify_delete_rights(@current_user, id, false) # Check if this user is allowed to delete the update with the ID provided
+				update_to_delete = Update.find(id)
+				if !update_to_delete.blank?		# When the id is found, push it to @deleted_updates variable
+					@deleted_updates.push(update_to_delete.name)
+					update_to_delete.destroy
+				end
+			end
+			render :json => {:values => @deleted_updates, :type => "deleted_updates", :token => @token}
+		end
+	end
 
-	# def view_update 	#Matt
-	# 	if verify_parameters([:id])		# Verify that page data was sent
-	# 		@update_to_view = Update.find(params[:id])
-	# 		if @update_to_view.approved? || (!@update_to_view.approved? && verify_access_rights(params[:id], true))		# If update exists and id has access rights, return update back to frontend
-	# 			@response = @update_to_view.updates_info	# set @response so it contains all infomation which frontend wants
-	# 			@response[:token] = @token		# Give @response a token
-	# 			render :json => @response 		# Send @response to frontend
-	# 		end
-	# 	end
-	# end
-  def view_update   #Matt
-    if verify_parameters([:id])   # Verify that page data was sent
-      @update_to_view = Update.find(params[:id])
-      unless @update_to_view.blank?
-        @response = @update_to_view.project.updates_info
-        @response[:token] = @token
-        render :json => @response    # Send @response to frontend
-      end
-    end
-  end
+	def view_update   #Matt
+		if verify_parameters([:id])   # Verify that page data was sent
+			@update_to_view = Update.find(params[:id])
+			unless @update_to_view.blank?
+				@response = @update_to_view.project.updates_info
+				@response[:token] = @token
+				render :json => @response    # Send @response to frontend
+			end
+		end
+	end
 end
