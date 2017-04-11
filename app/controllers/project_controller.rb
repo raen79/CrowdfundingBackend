@@ -98,7 +98,7 @@ class ProjectController < ApplicationController
     # Verify that page data was sent
     if verify_parameters([:page, :page_size, :sort, :filter])
       # Start a new custom search (class created in app/classes)
-      @custom_search = CustomSearch.new(Project, params[:page], params[:page_size], JSON.parse(params[:sort]), JSON.parse(params[:filter]))
+      @custom_search = CustomSearch.new(Project.approved, params[:page], params[:page_size], JSON.parse(params[:sort]), JSON.parse(params[:filter]))
       # Get result of search
       @results = @custom_search.results
       # Total number of results (without pagination)

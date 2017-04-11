@@ -2,7 +2,7 @@ class Transaction < ApplicationRecord
   belongs_to :user
   belongs_to :project
   belongs_to :refund, :class_name => "Transaction", :foreign_key => 'transaction_id'
-  has_one :parent, :class_name => "Transaction"
+  has_one :parent, :class_name => "Transaction", :dependent => :destroy
 
   ### Validations
   validates :amount, :presence => {:message => "notpresent"}

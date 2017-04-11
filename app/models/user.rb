@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  has_many :votes
-  has_many :projects
-  has_many :project_updates, class_name: "Update"
-  has_many :transactions
-  has_many :comments
+  has_many :votes, :dependent => :destroy
+  has_many :projects, :dependent => :destroy
+  has_many :project_updates, class_name: "Update", :dependent => :destroy
+  has_many :transactions, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
 
   ### Before Filters
   ## Encrypt password before saving them

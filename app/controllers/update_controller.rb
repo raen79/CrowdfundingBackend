@@ -80,7 +80,6 @@ class UpdateController < ApplicationController
       unless @update_to_view.blank?
         @response = @update_to_view.project.updates_info
         @response[:token] = @token
-        print @response
         render :json => @response    # Send @response to frontend
       end
     end

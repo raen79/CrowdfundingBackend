@@ -2,8 +2,8 @@ class Update < ApplicationRecord #Dom but mainly Eran
   belongs_to :user
   belongs_to :project
 
-  has_many :votes
-  has_many :comments
+  has_many :votes, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
 
   after_validation do
     self.name = self.name.titleize

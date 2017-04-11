@@ -2,10 +2,10 @@ class Project < ApplicationRecord
 
   belongs_to :user
 
-  has_many :votes
-  has_many :comments
-  has_many :transactions
-  has_many :project_updates, class_name: "Update"
+  has_many :votes, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+  has_many :transactions, :dependent => :destroy
+  has_many :project_updates, class_name: "Update", :dependent => :destroy
 
   ### Validations
   # Validate that name is present and greater than 3 chars

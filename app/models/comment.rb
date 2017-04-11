@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   belongs_to :project_update, class_name: "Update"
   belongs_to :project
 
-  has_many :votes
+  has_many :votes, :dependent => :destroy
   
 =begin
 validations

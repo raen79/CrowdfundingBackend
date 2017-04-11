@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ## Create User
-user = User.create(:email => "admin@admin.com", :f_name => "Admin", :l_name => "Admin", :password => "administrator")
+user = User.create(:email => "admin@admin.com", :f_name => "Admin", :l_name => "Admin", :password => "administrator", :admin => true)
 
 ## Create Vote Types
 vote_type = VoteType.create([{:name => "PROJECT"}, {:name => "UPDATE"}, {:name => "COMMENT"}])

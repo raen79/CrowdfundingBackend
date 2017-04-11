@@ -20,7 +20,7 @@ RSpec.describe "Authentication", :type => :request do
     @token = generate_token
   end
 
-  # view_user (GET)
+  ## view_user (GET)
   describe "GET /api/authentication/:id" do
     before do 
       create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
@@ -36,12 +36,12 @@ RSpec.describe "Authentication", :type => :request do
     end
   end
 
-  # view_users (GET)
+  ## view_users (GET)
   describe "GET /api/authentication" do
     before do 
       create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd", :f_name => "Second", :l_name => "User"
     end
-
+    
     it "returns 1 user with id = 2" do
       get '/api/authentication', :params => {:filter => '[{"column":"email", "value":"e", "operator":"startswith"}, {"column":"birth_date","operator":"isnull"}]',
                                                                   :sort => '[{"column":"email", "order":"desc"}, {"column":"id","order":"desc"}]',
