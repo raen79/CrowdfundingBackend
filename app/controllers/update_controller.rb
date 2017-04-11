@@ -59,6 +59,7 @@ class UpdateController < ApplicationController
 					update_to_delete.destroy
 				end
 			end
+			end
 			render :json => {:values => @deleted_updates, :type => "deleted_updates", :token => @token}
 		end
 	end
