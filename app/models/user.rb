@@ -12,8 +12,8 @@ class User < ApplicationRecord
   after_validation do
     self.salt = rand(36**64).to_s(36)
     self.password = BCrypt::Password.create(self.password + salt)
-    self.f_name = self.f_name.titleize
-    self.l_name = self.l_name.titleize
+    self.f_name = self.f_name.titleize if !self.f_name.blank?
+    self.l_name = self.l_name.titleize if !self.l_name.blank?
   end
 
   ### Validations
