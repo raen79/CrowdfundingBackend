@@ -38,16 +38,16 @@ class AuthenticationController < ApplicationController
       # If password does not match confirmation return error
       if params[:password] != params[:password_confirmation]
         render :json => {:error => 'notmatching', :cause => 'password_confirmation'}, :status => :bad_request
-      end
-
-      # If saved in database, return OK
-      if @user.save
-        token = generate_token(params[:email])
-        render :json => {:token => token}
-      # If it couldn't be saved, return error message and cause from model
       else
-        key_with_error = @user.errors.keys.first
-        render :json => {:error => @user.errors.messages[key_with_error].first, :cause => key_with_error}, :status => :bad_request
+        # If saved in database, return OK
+        if @user.save
+          token = generate_token(params[:email])
+          render :json => {:token => token}
+        # If it couldn't be saved, return error message and cause from model
+        else
+          key_with_error = @user.errors.keys.first
+          render :json => {:error => @user.errors.messages[key_with_error].first, :cause => key_with_error}, :status => :bad_request
+        end
       end
     end
   end
