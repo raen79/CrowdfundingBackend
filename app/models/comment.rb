@@ -32,4 +32,8 @@ validations
     end
   end
 
+  def creator
+    self.user.summary
+  end
+
 end
