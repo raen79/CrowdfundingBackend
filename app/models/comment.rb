@@ -23,8 +23,13 @@ validations
   	}
   end
 
-  def vote_amount
-  	self.votes.size
+  def sum_votes
+    relevant_votes = self.votes
+    if relevant_votes.size > 0
+      relevant_votes.where(:value => 1).size + (relevant_votes.where(:value => 0).size * -1)
+    else
+      0
+    end
   end
 
 end
