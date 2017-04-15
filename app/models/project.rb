@@ -106,7 +106,7 @@ class Project < ApplicationRecord
       updates.push({
           :id => update.id,
           :name => update.name,
-          :description => update.description.[0..200].gsub(/\s\w+\s*$/, '...'),
+          :description => update.description[0..200].gsub(/\s\w+\s*$/, '...'),
           :created_at => update.created_at
         })
     end
