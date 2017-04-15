@@ -55,7 +55,7 @@ class Project < ApplicationRecord
   def sum_votes
     relevant_votes = self.votes
     if relevant_votes.size > 0
-      relevant_votes.sum(:value)
+      relevant_votes.where(:value => 1).size + (relevant_votes.where(:value => 0).size * -1)
     else
       0
     end
@@ -121,7 +121,7 @@ class Project < ApplicationRecord
       project_comments.push({
           :id => comment.id,
           :content => comment.content,
-          :votes => comment.votes.sum(:value),
+          :votes => comment.sum_votes,
           :user => comment.creator,
           :created_at => update.created_at
         })
