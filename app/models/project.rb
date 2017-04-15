@@ -123,7 +123,7 @@ class Project < ApplicationRecord
           :content => comment.content,
           :votes => comment.sum_votes,
           :user => comment.creator,
-          :created_at => update.created_at
+          :created_at => comment.created_at
         })
     end
     
