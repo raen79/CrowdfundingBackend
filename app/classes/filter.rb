@@ -29,9 +29,9 @@ class Filter
     # If column and operator are set, change filter parameters to constructor's parameters' values, and create the filter's search string
     else
       # Set up instance variables
-      @column, @operator, @value = column, operator, value
+      @column, @operator, @value = column, operator, value.downcase
       # Set up search string
-      @search_string = @column + " " +  @operators[@operator].sub("value", @value)
+      @search_string = "LOWER(" + @column + ") " +  @operators[@operator].sub("value", @value)
     end
   end
 
