@@ -7,6 +7,7 @@ class ApplicationController < ActionController::API
   def check_token
     if !request.headers["Token"].blank?
       token = request.headers["Token"]
+      puts token
       # If token valid, store user in @current_user variable. Then store refreshed token in @token variable (+4 hours)
       begin
         # Decode token
