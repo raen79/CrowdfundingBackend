@@ -36,18 +36,13 @@ class Update < ApplicationRecord #Dom but mainly Eran
   #   end
   # end
 
-  def updates_info
-    updates = []
-
-    self.project_updates.each do |update|
-      updates.push({
-          :id => update.id,
-          :name => update.name,
-          :created_at => update.created_at
-        })
-    end
-
-    return updates
+  def info
+    {
+      :id => self.id,
+      :name => self.name,
+      :description => self.description,
+      :created_at => self.created_at
+    }
   end
 
   # Handle deleted users when deleted field is true
