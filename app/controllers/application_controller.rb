@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 
   include ApplicationHelpers
 
-  def check_token
+  def check_token(with_render = true)
     if !request.headers["Token"].blank?
       token = request.headers["Token"]
       # If token valid, store user in @current_user variable. Then store refreshed token in @token variable (+4 hours)
@@ -16,17 +16,17 @@ class ApplicationController < ActionController::API
         # Retrieve the user from the database using their email and store in instance variable @current_user (will be accessible in other controllers)
         @current_user = User.where(:email => user_email).first
         # If user does not exist, return error
-        render :json => {:error => "user_not_exist", :cause => "token"}, :status => :bad_request if @current_user.blank?
+        render :json => {:error => "user_not_exist", :cause => "token"}, :status => :bad_request if (@current_user.blank? && with_render == true)
 
         # Store new refreshed token in instance variable @token (will be available from other controllers). The @token must be returned in every successful api call.
         @token = generate_token(user_email)
       # If Token Expired, return error
       rescue JWT::ExpiredSignature
-        render :json => {:error => "expired", :cause => "token"}, :status => :bad_request
+        render :json => {:error => "expired", :cause => "token"}, :status => :bad_request if (@current_user.blank? && with_render == true)
       end
     # If token does not exist, return error
     else
-      render :json => {:error => "not_logged_in", :cause => "token"}, :status => :bad_request
+      render :json => {:error => "not_logged_in", :cause => "token"}, :status => :bad_request if (@current_user.blank? && with_render == true)
     end
   end
 end
