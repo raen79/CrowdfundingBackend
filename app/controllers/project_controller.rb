@@ -18,7 +18,7 @@ class ProjectController < ApplicationController
 
       # If project is saved in the database, return OK
       if @project.save
-        render :json => {:token => @token}
+        render :json => {:id => @project.id, :token => @token}
       else
         key_with_error = @project.errors.keys.first
         render :json => {:error => @project.errors.messages[key_with_error].first, :cause => key_with_error}, :status => :bad_request
@@ -38,7 +38,7 @@ class ProjectController < ApplicationController
       # If project exists, update attributes accordingly
       if !@project.blank?
         @project.update_attributes(@attr_to_update)
-        render :json => {:token => @token}
+        render :json => {:id => @project.id, :token => @token}
       else
         render :json => {:error => 'invalid', :cause => 'id'}, :status => :bad_request
       end
