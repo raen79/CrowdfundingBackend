@@ -85,7 +85,7 @@ class ProjectController < ApplicationController
   def view_project
     if verify_parameters([:id])
       @project = Project.find(params[:id])
-
+      puts @current_user
       if @project.approved? || (!@project.approved? && verify_access_rights(params[:id], true))
         @response = @project.detailed_info
         @response[:token] = @token
