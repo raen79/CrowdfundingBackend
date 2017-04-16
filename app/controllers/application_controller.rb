@@ -7,7 +7,6 @@ class ApplicationController < ActionController::API
   def check_token
     if !request.headers["Token"].blank?
       token = request.headers["Token"]
-      puts token
       # If token valid, store user in @current_user variable. Then store refreshed token in @token variable (+4 hours)
       begin
         # Decode token
@@ -16,7 +15,6 @@ class ApplicationController < ActionController::API
         user_email = decoded_token[0]["sub"]
         # Retrieve the user from the database using their email and store in instance variable @current_user (will be accessible in other controllers)
         @current_user = User.where(:email => user_email).first
-        puts user_email
         # If user does not exist, return error
         render :json => {:error => "user_not_exist", :cause => "token"}, :status => :bad_request if @current_user.blank?
 
