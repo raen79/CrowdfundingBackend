@@ -68,7 +68,7 @@ class UpdateController < ApplicationController
 		if verify_parameters([:id])   # Verify that page data was sent
 			@update_to_view = Update.find(params[:id])
 			unless @update_to_view.blank?
-				@response = @update_to_view.project.updates_info
+				@response = @update_to_view.info
 				@response[:token] = @token
 				render :json => @response    # Send @response to frontend
 			end
