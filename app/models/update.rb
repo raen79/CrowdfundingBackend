@@ -24,7 +24,7 @@ class Update < ApplicationRecord #Dom but mainly Eran
     full_sanitizer = Rails::Html::FullSanitizer.new
     description_without_tags = full_sanitizer.sanitize(self.description)
     if description_without_tags.length < 300 # do we really want to make it this long? [[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]
-      errors.add(:description, :message => "length")
+      errors.add(:description, "length")
     end
   end
 

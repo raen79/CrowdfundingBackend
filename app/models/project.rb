@@ -24,7 +24,7 @@ class Project < ApplicationRecord
     full_sanitizer = Rails::Html::FullSanitizer.new
     description_without_tags = full_sanitizer.sanitize(self.description)
     if description_without_tags.length < 300
-      errors.add(:description, :message => "length")
+      errors.add(:description, "length")
     end
   end
 
