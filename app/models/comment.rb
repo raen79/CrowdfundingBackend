@@ -15,7 +15,7 @@ validations
   	{
   		:id => self.id,
   		:content => self.content,
-  		:votes => self.votes,
+  		:votes => self.sum_votes,
   		:user => self.user,
   		:subject_id => self.subject_id,
   		:c_type => self.c_type,
@@ -26,7 +26,7 @@ validations
   def sum_votes
     relevant_votes = self.votes
     if relevant_votes.size > 0
-      relevant_votes.where(:value => 1).size + (relevant_votes.where(:value => 0).size * -1)
+      relevant_votes.sum(:value)
     else
       0
     end

@@ -1,6 +1,6 @@
 class CommunityController < ApplicationController
 	include CommunityHelpers
-	skip_before_action :check_token, :only => [:view_comment, :vote]
+	skip_before_action :check_token, :only => [:view_comment]
 
 	def add_comment
 		if verify_parameters([:subject_id, :content, :type])
@@ -71,15 +71,7 @@ class CommunityController < ApplicationController
 			@vote.project_id = params[:subject_id]
 			@vote.value = params[:value]
 			@vote.vote_type = VoteType.where(:name => params[:type]).first
-			
-
-			if @vote.save
-				render :json =>{:token => @token}
-			else
-				key_error = @vote.keys.first
-				render :json => {:error => @comment.errors.messages[key_error].first, :cause=> key_error}, :status => :bad_request	
-			end
-
+			create_or_update(@vote)
 		end
 	end
 

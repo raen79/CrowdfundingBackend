@@ -26,4 +26,13 @@ module CommunityHelpers
   	
   	end
 
+      def create_or_update(vote)
+          if vote.save
+            render :json =>{:token => @token}
+          else
+            key_error = vote.errors.keys.first
+            render :json => {:error => vote.errors.messages[key_error].first, :cause=> key_error}, :status => :bad_request 
+          end        
+      end
+
 end

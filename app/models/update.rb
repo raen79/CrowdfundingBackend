@@ -23,7 +23,7 @@ class Update < ApplicationRecord #Dom but mainly Eran
     # If description is smaller than 300 chars without tags
     full_sanitizer = Rails::Html::FullSanitizer.new
     description_without_tags = full_sanitizer.sanitize(self.description)
-    if description_without_tags.length < 300 # do we really want to make it this long? [[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]
+    if description_without_tags.length < 300 # do we really want to make it this long?
       errors.add(:description, "length")
     end
   end
@@ -36,11 +36,21 @@ class Update < ApplicationRecord #Dom but mainly Eran
   #   end
   # end
 
+  def sum_votes
+    relevant_votes = self.votes
+    if relevant_votes.size > 0
+      relevant_votes.sum(:value)
+    else
+      0
+    end
+  end
+
   def info
     {
       :id => self.id,
       :name => self.name,
       :description => self.description,
+      :votes => self.sum_votes,
       :created_at => self.created_at
     }
   end

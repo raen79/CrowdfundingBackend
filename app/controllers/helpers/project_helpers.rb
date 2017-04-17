@@ -13,4 +13,28 @@ module ProjectHelpers
 
     return true
   end
+
+  def return_projects_model(sorts)
+      sorts.each do |sort|
+          if sort["column"] == "backers"
+              return Project.approved.select("projects.*", "COUNT(distinct transactions.user_id)").left_joins(:transactions).group("projects.id")
+          elsif sort["column"] == "votes"
+              return Project.approved.left_joins(:votes).group("projects.id")
+          end
+      end
+
+      return Project.approved
+  end
+
+  def return_projects_sort(sorts)
+    sorts.each do |sort|
+          if sort["column"] == "backers"
+              sort["column"] = "COUNT(distinct transactions.user_id)"
+          elsif sort["column"] == "votes"
+              sort["column"] = "coalesce(SUM(votes.value), 0)"
+          end
+    end
+
+    return sorts
+  end
 end

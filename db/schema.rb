@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207165201) do
+ActiveRecord::Schema.define(version: 20170417125928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 20170207165201) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.binary   "value"
     t.integer  "user_id"
     t.integer  "vote_type_id"
     t.integer  "comment_id"
@@ -105,6 +104,7 @@ ActiveRecord::Schema.define(version: 20170207165201) do
     t.integer  "update_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "value"
     t.index ["comment_id"], name: "index_votes_on_comment_id", using: :btree
     t.index ["project_id"], name: "index_votes_on_project_id", using: :btree
     t.index ["update_id"], name: "index_votes_on_update_id", using: :btree
