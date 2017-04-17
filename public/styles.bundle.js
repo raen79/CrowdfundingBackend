@@ -57,16 +57,16 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 224:
+/***/ 228:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(397);
+var content = __webpack_require__(404);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(678)(content, {});
+var update = __webpack_require__(682)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -84,7 +84,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 396:
+/***/ 403:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
@@ -99,12 +99,12 @@ exports.push([module.i, ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0
 
 /***/ }),
 
-/***/ 397:
+/***/ 404:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
 // imports
-exports.i(__webpack_require__(396), "");
+exports.i(__webpack_require__(403), "");
 
 // module
 exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n\nbody {\n  padding: 0px;\n  margin: 0px;\n  background-color: #fbfbfa;\n}\n", ""]);
@@ -114,7 +114,7 @@ exports.push([module.i, "/* You can add global styles to this file, and also imp
 
 /***/ }),
 
-/***/ 678:
+/***/ 682:
 /***/ (function(module, exports) {
 
 /*
@@ -367,13 +367,13 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 681:
+/***/ 685:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(224);
+module.exports = __webpack_require__(228);
 
 
 /***/ })
 
-},[681]);
+},[685]);
 //# sourceMappingURL=styles.bundle.js.map
