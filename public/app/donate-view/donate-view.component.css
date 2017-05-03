@@ -1,0 +1,28 @@
+
+.donate {
+    margin: auto;
+    width: 30%;
+    text-align: center;
+}
+
+.app-input-section {
+    margin: auto;
+    width: 100%;
+    padding: 0px;
+}
+
+.long-width {
+  width: 100%;
+  text-align: left !important;
+}
+
+.input {
+  box-shadow: none !important;
+}
+
+button {
+    font-size: 1rem;
+    height: 50px;
+    color: white !important;
+    width: 90%;
+}

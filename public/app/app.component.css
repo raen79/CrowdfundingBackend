@@ -1,0 +1,43 @@
+
+md-toolbar {
+  background-color: #FFF;
+}
+
+/* The animation code */
+
+.nav-center {
+    margin: auto;
+    padding: 0px 150px 0px 0px;
+}
+
+.item {
+  font-size: 0.7em;
+  margin: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 44px;
+  line-height: 44px;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 0px;
+  border-bottom: 0px solid green;
+  border-bottom-width: 0px;
+  transition: border-bottom-width 0.1s ease-in-out, height 0.1s ease-in-out;
+}
+
+.item:hover {
+  border-bottom-width: 4px;
+  height: 40px;
+}
+
+.home {
+  font-size: 0.6em;
+  cursor: pointer;
+}
+
+.home h1 {
+  padding: 0px;
+  margin: 0px;
+}

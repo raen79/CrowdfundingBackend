@@ -1,0 +1,21 @@
+<div class="slider">
+  <div *ngIf="active" class="slider__slides">
+
+    <div
+      *ngFor="let slide of active; let i = index;"
+      (click)="onClick(i)">
+      <div
+        class="slider__slide-image"
+        [style.background-image]="'url(' + slide.imgSrc +')'"
+        >
+        <div class="slider__slide-overlay">
+          <div class="slider__slide-content">
+            <h3 class="slider__slide-title">{{ slide.title }}</h3>
+            <p class="slider__slide-subtitle">{{ slide.subtitle }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

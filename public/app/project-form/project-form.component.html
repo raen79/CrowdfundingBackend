@@ -1,0 +1,29 @@
+<form role="form" #projectForm="ngForm" (submit)="submit(projectForm)">
+   <md-card>
+    <md-input-container class="small-width">
+     <input mdInput placeholder="Project Title" [(ngModel)]="project.name" name="name" required>
+     <md-hint *ngIf="(error.subject == 'name')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+    </md-input-container>
+   </md-card>
+   <md-card>
+    <md-input-container class="small-width">
+     <input mdInput placeholder="Funding Goal (GBP)" [(ngModel)]="project.funding_goal" name="funding_goal" required>
+     <md-hint *ngIf="(error.subject == 'funding_goal')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+    </md-input-container>
+   </md-card>
+   <md-card>
+    <md-input-container class="small-width">
+     <input mdInput placeholder="Image URL" [(ngModel)]="project.image" name="image" required>
+     <md-hint *ngIf="(error.subject == 'image')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+    </md-input-container>
+   </md-card>
+   <md-card>
+    <md-input-container class="long-width">
+      <textarea mdInput rows="10" placeholder="Description" [(ngModel)]="project.description" name="description" required></textarea>
+      <md-hint *ngIf="(error.subject == 'description')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+    </md-input-container>
+   </md-card>
+
+   <button md-raised-button type="submit">Submit</button>
+
+</form>

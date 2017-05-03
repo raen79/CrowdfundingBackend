@@ -1,0 +1,30 @@
+<md-grid-list [cols]="columns" rowHeight="470px" gutterSize="8px">
+<md-grid-tile *ngFor="let card of cards; let i=index" [routerLink]="['/project', card.id]">
+<div class="card" *ngIf="i<amount">
+  <div class="card__header">
+    <div class="card__header-image" [style.background-image]="'url(' + card.image +')'"></div>
+  </div>
+  <div class="card__body">
+    <h3 class="card__body-title">
+      <a>{{ card.name }}</a>
+    </h3>
+    <p class="card__body-content">
+      {{ card.description | slice:0:75 }}...
+    </p>
+  </div>
+  <div class="card__footer">
+    <div class="card__footer-title">
+      {{ card.funding_goal | currency : 'GBP':true:'1.0-2' }}
+    </div>
+    <div class="card__progress">
+      <span class="card__progress-inner" [ngStyle]="{ 'width': card.current_funding/card.funding_goal * 100 + '%' }"></span>
+    </div>
+    <div class="card__footer-footnote">
+      <span>{{ ((card.current_funding/card.funding_goal)*100).toFixed(0) }}% </span>
+      <span>25 days remaining</span>
+    </div>
+  </div>
+</div>
+</md-grid-tile>
+</md-grid-list>
+<router-outlet></router-outlet>

@@ -1,0 +1,44 @@
+<md-card class="main">
+ <md-card class="register">
+   <h1>Sign Up</h1>
+   <form role="form" (ngSubmit)="registerForm.form.valid ? register(registerForm) : null" #registerForm="ngForm">
+   <md-card class="app-input-section form-group">
+    <md-input-container>
+     <input mdInput type="text" [(ngModel)]="user.first_name" name="first_name" class="form-control" placeholder="First Name">
+     <md-hint *ngIf="(error.subject == 'first_name')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+    </md-input-container>
+   </md-card>   
+   <md-card class="app-input-section form-group">
+     <md-input-container>
+     <input mdInput type="text" [(ngModel)]="user.last_name" name="last_name" class="form-control" placeholder="Last Name">
+     <md-hint *ngIf="(error.subject == 'last_name')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+     </md-input-container>
+   </md-card>
+   <md-card class="app-input-section form-group">
+     <md-input-container>
+     <input mdInput type="text" [(ngModel)]="user.email" required name="email" class="form-control" placeholder="Email">
+     <md-hint *ngIf="(error.subject == 'email')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+     </md-input-container>
+   </md-card>
+   <md-card class="app-input-section form-group">
+     <md-input-container>
+     <input mdInput type="password" [(ngModel)]="user.password" required name="password" class="form-control" placeholder="Password">
+     <md-hint *ngIf="(error.subject == 'password')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+     </md-input-container>
+   </md-card>
+  <md-card class="app-input-section form-group">
+    <md-input-container>
+     <input mdInput type="password" [(ngModel)]="user.password_confirmation" required name="password_confirmation" class="form-control" placeholder="Confirm Password">
+     <md-hint *ngIf="(error.subject == 'password_confirmation')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+     </md-input-container>
+   </md-card>
+   <md-card class="app-input-section form-group">
+    <md-input-container>
+     <input mdInput type="text" [(ngModel)]="user.birth_date" name="birth_date" class="form-control" placeholder="Date of Birth">
+     <md-hint *ngIf="(error.subject == 'birth_date')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+     </md-input-container>
+   </md-card>
+   <button md-raised-button color="primary" type="submit">Submit</button>
+   </form>
+ </md-card>
+</md-card>

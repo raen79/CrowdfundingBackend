@@ -1,0 +1,35 @@
+.main {
+    background-image: url("/src/assets/1.jpg") !important ;
+    width: 100%;
+    box-shadow: none !important;
+    height: 100%;
+}
+
+
+.register {
+    margin: 30px auto;
+    width: 30%;
+    text-align:center;
+}
+
+md-input-container {
+    width: 90%;
+}
+
+.app-input-section {
+    margin: auto;
+    width: 100%;
+    padding: 0px;
+}
+
+.form-group {
+  box-shadow: none !important;
+}
+
+button {
+    font-size: 0.95rem;
+    height: 45px;
+    color: white !important;
+    width: 90%;
+    margin-top: 5px;   
+}
