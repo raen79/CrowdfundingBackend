@@ -24,11 +24,16 @@ FactoryGirl.define do
       user
     end
     
+    factory :comment_type do
+      id 1
+      name "PROJECT"
+    end
+
     factory :comment do
       id 1
-      content "jeremy so lit"
+      content "jeremy's comment"
       user
-      comment_type_id 1
+      comment_type
       project
     end
 
