@@ -2077,7 +2077,7 @@ module.exports = module.exports.toString();
 /***/ 422:
 /***/ (function(module, exports) {
 
-module.exports = " <md-card class=\"main\">\n   <img src=\"/src/assets/about.jpg\"/>\n </md-card>"
+module.exports = " <md-card class=\"main\">\n   <img src=\"/assets/about.jpg\"/>\n </md-card>"
 
 /***/ }),
 
