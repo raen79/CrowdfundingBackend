@@ -1,0 +1,23 @@
+ <md-card class="main">
+
+ <md-card class="login">
+   <h2>Login</h2>
+   <form role="form" (submit)="login(loginForm)" #loginForm="ngForm">
+   <md-card class="app-input-section form-group">
+     <md-input-container class="long">
+      <input mdInput type="text" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email">
+      <md-hint *ngIf="(error.subject == 'email')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+     </md-input-container>
+   </md-card>
+   <md-card class="app-input-section form-group">
+    <md-input-container class="long">
+     <input mdInput type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password">
+     <md-hint *ngIf="(error.subject == 'password')" [ngStyle]="{'color': 'red'}" align="start">{{error.message}}</md-hint>
+    </md-input-container>
+   </md-card>
+   <button md-raised-button color="primary"  type="submit">Submit</button>
+   <button md-raised-button class="other" [routerLink]="['/register']" preserveQueryParams>Sign Up</button>
+
+ </form>
+ </md-card>
+</md-card>

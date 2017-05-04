@@ -1,0 +1,38 @@
+<md-card class="main">
+      <div class="container">
+        <div class="header">
+         
+        </div>
+          <div class="colum_left">
+                <md-card style="padding:0px;">
+                  <div class="project__header-image" [style.background-image]="'url(' + project?.image +')'"></div>
+                </md-card>
+                <md-card class="description">
+                  <h1 md-line>{{ project?.current_funding | currency : 'GBP':true:'1.0-2' }} of {{ project?.funding_goal | currency : 'GBP':true:'1.0-2' }} Goal</h1>
+                  <div class="card__progress">
+                      <span class="card__progress-inner" [ngStyle]="{ 'width': project?.current_funding/project?.funding_goal * 100 + '%' }"></span>
+                  </div>
+                  <br>
+                  {{ project?.description }}
+                </md-card>
+
+          </div>
+          <div class="colum_right">
+            <md-card class="info">
+             <h1 md-line>{{ project?.name }}</h1>
+             
+            <span class="buttons">
+              <button class="donate_button" md-raised-button color="primary" [routerLink]="['/donate', project?.id]">Donate</button>
+              <button class="remind_button" md-raised-button>♥ Favourite</button>
+              <button class="share_button" md-raised-button>Share</button>
+            </span>
+            </md-card>
+          </div>
+          <div class="colum_right">
+            <div class="updates">
+              <app-update [updates] = "project?.updates"></app-update>
+            </div>
+          </div>
+      </div>
+</md-card>
+<router-outlet></router-outlet>

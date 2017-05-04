@@ -1,0 +1,15 @@
+<div class="left">
+<form (submit)="submit()" #searchForm="ngForm">
+	<md-input-container class="search">
+	      <input mdInput type="text" [(ngModel)]="query" name="query" class="form-control" placeholder="Find Project">
+	</md-input-container>
+</form>
+</div>
+
+<div class="right">
+<md-select placeholder="Sort By" (ngModelChange)="generateSort($event)" [(ngModel)]="sort">
+	<md-option *ngFor="let s of sorts" name="sort" [value]="s.value"><span>{{ s.name }}</span></md-option>
+</md-select>
+</div>
+
+<app-card [amount]=12 [filter]="filter" [sort]="sort"></app-card>

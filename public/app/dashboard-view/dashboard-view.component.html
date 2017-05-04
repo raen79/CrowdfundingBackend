@@ -1,0 +1,23 @@
+
+<md-card>
+      <div class="colum_left">
+            <h2 md-line>!! User's Name !!</h2>
+            <h3 md-line>Updates</h3>
+          <div class="updates" *ngFor="let project of projects">
+              <app-update [updates] = "project.updates"></app-update>
+            </div></div>
+      <div class="colum_right">
+            <br>
+            <br>
+            <h3 md-line>My Projects</h3>
+            <div class="card">
+            <app-card class="card" [amount]=2 [columns]=2></app-card>
+            </div>
+            <button md-raised-button color="accent">View all</button>
+            <h3 md-line>Projects You Love</h3>
+            <div class="card">
+            <app-card class="card" [amount]=2 [columns]=2></app-card>
+            </div>
+            <button md-raised-button color="accent">View all</button>
+      </div>
+</md-card>

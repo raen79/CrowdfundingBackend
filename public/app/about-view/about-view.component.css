@@ -1,0 +1,13 @@
+.main {
+    width: 100%;
+    box-shadow: none !important;
+    height: 1050px;
+    padding: 0px;
+    text-align: center;
+    background-color: #ddd;
+}
+
+img {
+  width: 70%;
+  height: auto;
+}

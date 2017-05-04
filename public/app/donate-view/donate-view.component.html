@@ -1,0 +1,24 @@
+<md-card class="donate">
+<form role="form" (submit)="donate(donateForm)" #donateForm="ngForm">
+   <md-card class="input">
+    <md-input-container class="long-width">
+     <input [(ngModel)]="donation.amount" name="amount" required mdInput placeholder="Donation Amount">
+    </md-input-container>
+   </md-card>
+
+   <md-card class="input">
+    <md-select class="long-width" placeholder="Display username?">
+     <md-option>Yes</md-option>
+     <md-option>No</md-option>
+   </md-select>
+   </md-card>
+
+   <md-card class="input">
+    <md-input-container class="long-width">
+      <textarea mdInput rows="3" placeholder="Add a comment"></textarea>
+    </md-input-container>
+   </md-card>
+
+   <button md-raised-button color="primary" type="submit">Continue to Paypal</button>
+</form>
+</md-card>
