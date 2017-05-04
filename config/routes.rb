@@ -47,4 +47,7 @@ Rails.application.routes.draw do
     end
     put '/refund_transaction', :to => 'transaction#refund_transaction'
   end
+
+  # Angular routes
+  get "*unmatched_route" => "task#index"
 end

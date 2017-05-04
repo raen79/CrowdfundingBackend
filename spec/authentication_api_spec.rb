@@ -15,9 +15,84 @@ def generate_token
 end
 
 RSpec.describe "Authentication", :type => :request do
-  before do
-    create :user
-    @token = generate_token
+  before do |example|
+    unless example.metadata[:skip_before]
+      create :user
+      @token = generate_token
+    end
+  end
+
+  ## login (POST)
+  describe "POST /api/authentication" do
+    it "returns a token (meaning that the user is logged in)" do
+      params = {
+        :email => "admin@admin.com",
+        :password => "administrator"
+      }
+
+      post '/api/authentication', :params => params.to_json, :headers => {'Content-Type': 'application/json'}
+      body = JSON.parse(response.body)
+
+      expect(response.status).to eq 200
+      expect(body['token']).to be_a(String)
+    end
+  end
+
+  ## register (PUT)
+  describe "PUT /api/authentication", :skip_before do
+    it "creates a new user in the database" do
+      params = {
+        :email => "test@admin.com",
+        :password => "administrator",
+        :password_confirmation => "administrator",
+        :birth_date => "12-10-1991"
+      }
+
+      expect {
+        put '/api/authentication', :params => params.to_json, :headers => {'Content-Type': 'application/json'}
+      }.to change{User.count}.by(1)
+
+      params.each do |param, value|
+        unless param == :password_confirmation
+          expect(User.last[param]).not_to be_nil
+        end
+      end
+    end
+  end
+
+  ## modify_user (PATCH)
+  describe "modify_user" do
+    it "modifies the user in the database" do
+      params = {
+        :id => 1,
+        :f_name => "Name",
+        :password => "new_password",
+        :password_confirmation => "new_password",
+        :birth_date => "12-10-1999"
+      }
+
+      expect {
+        patch '/api/authentication', :params => params.to_json, :headers => {'Content-Type': 'application/json', 'Token': @token}
+      }.to change{User.find(params[:id]).f_name}
+        .and change{User.find(params[:id]).password}
+        .and change{User.find(params[:id]).birth_date}
+    end
+  end
+
+  ## delete_user (DELETE)
+  describe "delete_user" do
+    before do 
+      create :user, :id => 2, :email => "eran.peer79@gmail.com", :password => "P@ssw0rd"
+      create :user, :id => 3, :email => "eran.peer@gmail.com", :password => "P@ssw0rd"
+    end
+
+    it "deletes the users in the database" do
+      params = { :id => [2, 3] }
+
+      expect {
+        delete '/api/authentication', :params => params.to_json, :headers => {'Content-Type': 'application/json', 'Token': @token}
+      }.to change{User.count}.by(-2)
+    end
   end
 
   ## view_user (GET)

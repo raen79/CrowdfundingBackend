@@ -4,7 +4,6 @@ class CommunityController < ApplicationController
 
 	def add_comment
 		if verify_parameters([:subject_id, :content, :type])
-			puts @current_user
 			@comment = @current_user.comments.new
 
 			#setup new comment
