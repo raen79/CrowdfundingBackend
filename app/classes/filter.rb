@@ -31,7 +31,7 @@ class Filter
       # Set up instance variables
       @column, @operator, @value = column, operator, value.downcase
       # Set up search string
-      @search_string = "LOWER(" + @column + ") " +  @operators[@operator].sub("value", @value)
+      @search_string = "LOWER(CAST(" + @column + " AS TEXT)) " +  @operators[@operator].sub("value", @value)
     end
   end
 
